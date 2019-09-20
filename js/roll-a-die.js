@@ -1,7 +1,7 @@
 import '../less/roll-a-die.less';
 import Errors from './Types';
 
-const dieInDOM = [];
+let dieInDOM = [];
 function verifyParams(options) {
   const { numberOfDice, callback, element, delay, values } = options;
   if (!element) throw new Error(Errors.MISSING_ELEMENT);
@@ -9,11 +9,10 @@ function verifyParams(options) {
 
   if (!numberOfDice) throw new Error(Errors.MISSING_NUMBER_OF_DICE);
   if (typeof numberOfDice !== 'number') throw new Error(Errors.NUMBER_OF_DICE_NUMBER);
-  if (!Number.isInteger(numberOfDice))
+  if (!Number.isInteger(numberOfDice) || numberOfDice < 1)
     throw new Error(Errors.NUMBER_OF_DICE_INTEGER);
 
-  if (!callback) throw new Error(Errors.MISSING_CALLBACK);
-  if (typeof callback !== 'function') throw new Error(Errors.INVALID_CALLBACK);
+  if (callback && typeof callback !== 'function') throw new Error(Errors.INVALID_CALLBACK);
 
   if (delay && typeof delay !== 'number') throw new Error(Errors.INVALID_DELAY_TYPE);
 
@@ -27,13 +26,24 @@ function verifyParams(options) {
   }
 }
 
-function playSound(outerContainer) {
-  let played;
-  const audio = document.createElement('audio');
-  outerContainer.appendChild(audio);
-  audio.src = require('./nc93322.mp3');
-  played = true;
-  audio.play();
+function playSound(outerContainer, numberOfDice) {
+  let played = 0;
+
+  const intervalId = setInterval(() => {
+    const audio = document.createElement('audio');
+    outerContainer.appendChild(audio);
+    audio.onended = function () {
+      audio.remove();
+    };
+    audio.src = require('./nc93322.mp3');
+    audio.play();
+    played++;
+    console.log("replayed");
+
+    if (played === numberOfDice) {
+      clearInterval(intervalId);
+    }
+  }, random(80, 200));
 }
 
 function getFace(pips) {
@@ -77,13 +87,13 @@ const rollADie = function (options) {
   let delay = options.delay || 3000;
   if (dieInDOM.length) {
     dieInDOM.forEach(die => removeDieFromDOM(die));
-    dieInDOM.length = 0; //reset the array
+    dieInDOM = []; //reset the array
   }
   verifyParams(options);
   const faces = 6;
   const result = [];
   if (!noSound) {
-    playSound(element);
+    playSound(element, numberOfDice);
   }
 
   for (let i = 0; i < numberOfDice; i++) {
@@ -100,21 +110,33 @@ const rollADie = function (options) {
     const dieId = `${Math.random() * 10}-${dieFace}`;
     dieInDOM.push(dieId);
     const dice = appendDieContainers(dieId, element, angle);
+    const dotR = 3;
     [
-      [{ cx: 16, cy: 16, r: 6, fill: 'red' }],
-      [{ cx: 8, cy: 8, r: 3 }, { cx: 24, cy: 24, r: 3 }],
-      [{ cx: 8, cy: 8, r: 3 }, { cx: 16, cy: 16, r: 3 }, { cx: 24, cy: 24, r: 3 }],
-      [{ cx: 8, cy: 8, r: 3 }, { cx: 24, cy: 24, r: 3 }, { cx: 8, cy: 24, r: 3 }, { cx: 24, cy: 8, r: 3 }],
-      [{ cx: 8, cy: 8, r: 3 }, { cx: 16, cy: 16, r: 3 }, { cx: 24, cy: 24, r: 3 }, { cx: 8, cy: 24, r: 3 }, { cx: 24, cy: 8, r: 3 }],
-      [{ cx: 8, cy: 8, r: 3 }, { cx: 24, cy: 24, r: 3 }, { cx: 8, cy: 16, r: 3 }, { cx: 24, cy: 16, r: 3 }, { cx: 8, cy: 24, r: 3 }, { cx: 24, cy: 8, r: 3 }]
+      [{ cx: 16, cy: 16, r: dotR }],
+      [{ cx: 8, cy: 8, r: dotR }, { cx: 20, cy: 20, r: dotR }],
+      [{ cx: 7, cy: 7, r: dotR }, { cx: 15, cy: 15, r: dotR }, { cx: 22, cy: 22, r: dotR }],
+      [{ cx: 7, cy: 7, r: dotR }, { cx: 22, cy: 22, r: dotR }, { cx: 7, cy: 22, r: dotR }, { cx: 22, cy: 7, r: dotR }],
+      [{ cx: 7, cy: 7, r: dotR }, { cx: 15, cy: 15, r: dotR }, { cx: 22, cy: 22, r: dotR }, { cx: 7, cy: 22, r: dotR }, { cx: 22, cy: 7, r: dotR }],
+      [{ cx: 6, cy: 6, r: dotR }, { cx: 22, cy: 22, r: dotR }, { cx: 6, cy: 14, r: dotR }, { cx: 22, cy: 14, r: dotR }, { cx: 6, cy: 22, r: dotR }, { cx: 22, cy: 6, r: dotR }]
     ].map(getFace).forEach(face => dice.appendChild(face));
 
-    setTimeout(() => removeDieFromDOM(dieId), delay);
+    setTimeout(() => {
+      removeDieFromDOM(dieId);
+      if (callback) {
+        callback(result);
+      }
+    }, delay);
 
-    if (result.length === numberOfDice && callback) {
-      callback(result);
+
+    if (result.length === numberOfDice) {
+      return result;
     }
   }
 };
 
 export default rollADie;
+
+
+function random(min, max) {
+  return Math.floor(Math.random() * (max - min + 1)) + min;
+}

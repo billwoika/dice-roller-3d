@@ -2,6 +2,7 @@ import rollADie from '../js/roll-a-die';
 import Errors from '../js/Types';
 
 const element = document.createElement('div');
+jest.useFakeTimers();
 
 describe('Roll A Die', function () {
   afterEach(function () {
@@ -14,20 +15,26 @@ describe('Roll A Die', function () {
     rollADie({ element, numberOfDice: 2, callback: cb, noSound: true });
   });
 
-  it('should call callback.', function () {
-    let result;
-    const cb = (r) => result = r;
-    rollADie({ element, numberOfDice: 1, callback: cb, noSound: true });
+  it('should return a result.', function () {
+    const result = rollADie({ element, numberOfDice: 1, noSound: true });
     expect(result).toHaveLength(1);
   });
 
+  it('should call callback.', function () {
+    const cb = jest.fn();
+    console.log(typeof cb);
+
+    rollADie({ element, numberOfDice: 1, callback: cb, noSound: true });
+    expect(cb).not.toBeCalled();
+    jest.runAllTimers();
+
+    expect(cb).toBeCalled();
+  });
+
   it('should use given values.', function () {
-    let result;
-    const cb = (r) => result = r;
-    rollADie({
+    const result = rollADie({
       element,
       numberOfDice: 2,
-      callback: cb,
       noSound: true,
       values: [4, 6],
     });
@@ -56,10 +63,6 @@ describe('Check For Required Params', () => {
   test('should throw on missing numberOfDice.', () => {
     const options = Object.assign({}, defaultOption, { numberOfDice: null });
     expect(() => rollADie(options)).toThrow(Errors.MISSING_NUMBER_OF_DICE);
-  });
-  test('should throw on missing callback function.', () => {
-    const options = Object.assign({}, defaultOption, { callback: null });
-    expect(() => rollADie(options)).toThrow(Errors.MISSING_CALLBACK);
   });
 });
 
