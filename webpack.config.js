@@ -1,16 +1,15 @@
-const webpack = require('webpack');
 const path = require('path');
 
 const BUILD_DIR = path.resolve(__dirname, 'dist/');
 const APP_DIR = path.resolve(__dirname, 'js/');
 
 const config = {
-  entry: APP_DIR + '/roll-a-die.js',
+  entry: APP_DIR + '/dice-roller.js',
   output: {
     path: BUILD_DIR,
-    filename: 'roll-a-die.js',
+    filename: 'dice-roller.js',
     publicPath: 'dist/',
-    library: 'rollADie',
+    library: 'diceRoller',
     libraryExport: 'default',
     libraryTarget: 'umd',
   },

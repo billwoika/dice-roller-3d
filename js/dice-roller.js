@@ -1,4 +1,4 @@
-import '../less/roll-a-die.less';
+import '../less/dice-roller.less';
 import Errors from './Types';
 
 let dieInDOM = [];
@@ -38,7 +38,6 @@ function playSound(outerContainer, numberOfDice) {
     audio.src = require('./nc93322.mp3');
     audio.play();
     played++;
-    console.log("replayed");
 
     if (played === numberOfDice) {
       clearInterval(intervalId);
@@ -82,7 +81,7 @@ function removeDieFromDOM(dieId) {
   }
 }
 
-const rollADie = function (options) {
+const diceRoller = function (options) {
   const { numberOfDice, callback, element, noSound, values } = options;
   let delay = options.delay || 3000;
   if (dieInDOM.length) {
@@ -134,7 +133,7 @@ const rollADie = function (options) {
   }
 };
 
-export default rollADie;
+export default diceRoller;
 
 
 function random(min, max) {

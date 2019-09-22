@@ -1,8 +1,8 @@
 {
-  "name": "roll-a-die",
+  "name": "dice-roller-3d",
   "version": "1.0.0",
   "description": "Simple 3D dice roll using CSS3 animation.",
-  "main": "dist/roll-a-die.js",
+  "main": "dist/dice-roller-3d.js",
   "dependencies": {},
   "devDependencies": {
     "babel-core": "^6.26.3",
@@ -29,7 +29,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git@github.com:drdreo/roll-a-die.git"
+    "url": "git@github.com:drdreo/dice-roller-3d.git"
   },
   "keywords": [
     "dice",
@@ -45,10 +45,10 @@
   "author": "Andreas K. Hahn",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/drdreo/roll-a-die/issues"
+    "url": "https://github.com/drdreo/dice-roller-3d/issues"
   },
-  "homepage": "https://github.com/drdreo/roll-a-die",
+  "homepage": "https://github.com/drdreo/dice-roller-3d",
   "files": [
-    "dist/roll-a-die.js"
+    "dist/dice-roller-3d.js"
   ]
 }
