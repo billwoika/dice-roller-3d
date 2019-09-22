@@ -3,7 +3,7 @@ const ErrorTypes = {
   INVALID_ELEMENT: '"element" must be a HTMLElement.',
   MISSING_NUMBER_OF_DICE: 'Number of dice to use not specified.',
   NUMBER_OF_DICE_NUMBER: '"numberOfDice" must be a number.',
-  NUMBER_OF_DICE_INTEGER: '"numberOfDice" must be an integer.',
+  NUMBER_OF_DICE_INTEGER: '"numberOfDice" must be a valid integer.',
   MISSING_CALLBACK: 'Provide a callback function to recieve dice values.',
   INVALID_CALLBACK: '"callback" must be a function.',
   INVALID_DELAY_TYPE: 'Time is seconds. "delay" must be a number.',
