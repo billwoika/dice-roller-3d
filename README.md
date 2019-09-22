@@ -1,5 +1,5 @@
 # Dice Roller
-[![npm package](https://img.shields.io/npm/v/roll-a-die.svg?style=flat-square)](https://www.npmjs.org/package/dice-roller3-d) 
+[![npm package](https://img.shields.io/npm/v/dice-roller-3d.svg?style=flat-square)](https://www.npmjs.org/package/dice-roller-3d) 
 
 Simple 3D dice roll animator using CSS3 Animation.
 

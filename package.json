@@ -1,8 +1,8 @@
 {
   "name": "dice-roller-3d",
-  "version": "1.0.0",
+  "version": "1.0.3",
   "description": "Simple 3D dice roll using CSS3 animation.",
-  "main": "dist/dice-roller-3d.js",
+  "main": "dist/dice-roller.js",
   "dependencies": {},
   "devDependencies": {
     "babel-core": "^6.26.3",
