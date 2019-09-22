@@ -1,6 +1,6 @@
 {
   "name": "dice-roller-3d",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Simple 3D dice roll using CSS3 animation.",
   "main": "dist/dice-roller.js",
   "dependencies": {},
@@ -49,6 +49,6 @@
   },
   "homepage": "https://github.com/drdreo/dice-roller-3d",
   "files": [
-    "dist/dice-roller-3d.js"
+    "dist/dice-roller.js"
   ]
 }
