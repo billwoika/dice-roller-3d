@@ -1,52 +1,53 @@
-# Roll A Die
-[![npm package](https://img.shields.io/npm/v/roll-a-die.svg?style=flat-square)](https://www.npmjs.org/package/roll-a-die)  [![Build Status](https://img.shields.io/travis/chukwumaijem/roll-a-die.svg?style=flat-square)](https://travis-ci.com/chukwumaijem/roll-a-die.svg?branch=master)
+# Dice Roller
+[![npm package](https://img.shields.io/npm/v/roll-a-die.svg?style=flat-square)](https://www.npmjs.org/package/dice-roller3-d) 
 
-Simple 3D dice roll animator by CSS3 Animation.
+Simple 3D dice roll animator using CSS3 Animation.
 
-[Demo](https://codepen.io/chukwuma-ezumezu/pen/qYKOGW)
 
 ## Vanilla JS
-Copy dist/roll-a-die.js into your library folder
+Copy dist/dice-roller.js into your library folder
 Load it into your HTML script
 ```
-<script type="text/javascript" src="path/to/roll-a-die.js"></script>
+<script type="text/javascript" src="path/to/dice-roller.js"></script>
 ```
-You can use the [UNPKG](https://unpkg.com) link `https://unpkg.com/roll-a-die@1.3.0/dist/roll-a-die.js`. Remember to update the package number to the most recent.
 
 Call the method with its options.
 ```
-rollADie({ element, numberOfDice: 2, callback});
+{
+  element: Element;
+  numberOfDice: number;
+  delay: number;
+  callback: Function;
+  values: number[];
+}
+
+diceRoller(options);
 ```
 
 ## With npm (and CommonJS builder)
 Install with npm.
 ```
-npm install --save roll-a-die
-```
-
-Install with yarn.
-```
-yarn add roll-a-die
+npm install --save dice-roller-3d
 ```
 
 import the library
 
 ES5
 ```
-const rollADie = require('roll-a-die');
+const diceRoller = require('dice-roller-3d');
 ```
 
 ES6
 ```
-import rollADie from 'roll-a-die';
+import diceRoller from 'dice-roller-3d';
 ```
 
 Call the method
 ```
-rollADie({ element, numberOfDice: 2, callback});
-rollADie({ element, numberOfDice: 2, callback, noSound: true});
-rollADie({ element, numberOfDice: 2, callback, delay: 1000});
-rollADie({ element, numberOfDice: 2, callback, values: [3, 4]});
+const result = diceRoller({ element, numberOfDice: 2, callback});
+const result = diceRoller({ element, numberOfDice: 2, callback, noSound: true});
+const result = diceRoller({ element, numberOfDice: 2, callback, delay: 1000});
+const result = diceRoller({ element, numberOfDice: 2, callback, values: [3, 4]});
 ```
 
 ## Parameter Definitions
@@ -61,6 +62,7 @@ rollADie({ element, numberOfDice: 2, callback, values: [3, 4]});
 ## Thanks
 * (Sound Effect)
    * http://commons.nicovideo.jp/material/nc93322
+* Forked from: https://github.com/chukwumaijem/roll-a-die
 
 ## License
 MIT License
