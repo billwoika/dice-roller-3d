@@ -111,12 +111,13 @@ const diceRoller = function (options) {
     const dice = appendDieContainers(dieId, element, angle);
     const dotR = 3;
     [
+      [{}],
       [{ cx: 16, cy: 16, r: dotR }],
       [{ cx: 8, cy: 8, r: dotR }, { cx: 20, cy: 20, r: dotR }],
       [{ cx: 7, cy: 7, r: dotR }, { cx: 15, cy: 15, r: dotR }, { cx: 22, cy: 22, r: dotR }],
       [{ cx: 7, cy: 7, r: dotR }, { cx: 22, cy: 22, r: dotR }, { cx: 7, cy: 22, r: dotR }, { cx: 22, cy: 7, r: dotR }],
       [{ cx: 7, cy: 7, r: dotR }, { cx: 15, cy: 15, r: dotR }, { cx: 22, cy: 22, r: dotR }, { cx: 7, cy: 22, r: dotR }, { cx: 22, cy: 7, r: dotR }],
-      [{ cx: 6, cy: 6, r: dotR }, { cx: 22, cy: 22, r: dotR }, { cx: 6, cy: 14, r: dotR }, { cx: 22, cy: 14, r: dotR }, { cx: 6, cy: 22, r: dotR }, { cx: 22, cy: 6, r: dotR }]
+      //[{ cx: 6, cy: 6, r: dotR }, { cx: 22, cy: 22, r: dotR }, { cx: 6, cy: 14, r: dotR }, { cx: 22, cy: 14, r: dotR }, { cx: 6, cy: 22, r: dotR }, { cx: 22, cy: 6, r: dotR }]
     ].map(getFace).forEach(face => dice.appendChild(face));
 
     setTimeout(() => {
